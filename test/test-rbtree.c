@@ -55,15 +55,15 @@ void test_find_single(const key_t key, const key_t wrong_key) {
 
 // erase should delete root node
 void test_erase_root(const key_t key) {
-  rbtree *t = new_rbtree();
-  node_t *p = rbtree_insert(t, key);
-  assert(p != NULL);
-  assert(t->root == p);
-  assert(p->key == key);
+  rbtree *t = new_rbtree();           // 새 트리 생성
+  node_t *p = rbtree_insert(t, key);  // 노드 1개 추가
+  assert(p != NULL);                  // 노드 생성 성공(null 아님)
+  assert(t->root == p);               // 생성한 노드가 트리의 루트
+  assert(p->key == key);              // 요구한 key대로 성공
 
-  rbtree_erase(t, p);
+  rbtree_erase(t, p);                 // 삭제 시도
 #ifdef SENTINEL
-  assert(t->root == t->nil);
+  assert(t->root == t->nil);          // 삭제 후, 루트노드가 삭제되었는가?
 #else
   assert(t->root == NULL);
 #endif
@@ -368,16 +368,16 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
 }
 
 int main(void) {
-  test_init();
-  test_insert_single(1024);
-  test_find_single(512, 1024);
-  test_erase_root(128);
-  test_find_erase_fixed();
-  test_minmax_suite();
-  test_to_array_suite();
-  test_distinct_values();
-  test_duplicate_values();
-  test_multi_instance();
-  test_find_erase_rand(10000, 17);
-  printf("Passed all tests!\n");
+  test_init();                    //2023-05-09 00:21
+  test_insert_single(1024);       //2023-05-09 01:13
+  test_find_single(512, 1024);    //2023-05-09 01:50
+  test_erase_root(128);           //
+  test_find_erase_fixed();        //
+  test_minmax_suite();            //
+  test_to_array_suite();          //
+  test_distinct_values();         //
+  test_duplicate_values();        //
+  test_multi_instance();          //
+  test_find_erase_rand(10000, 17);//
+  printf("Passed all tests!\n");  //
 }
